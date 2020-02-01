@@ -58,7 +58,10 @@ def home(request):
 
 def directory(request):
 	all_listings = db.listings.find({}) #by default, present all listings
-
-	args = { 'all' : all_listings}
+	all_data = []
+	headers = list(all_listings[0].keys())[1:]
+	for listing in all_listings:
+		all_data.append(list(listing.values())[1:])
+	args = { 'all' : all_data, 'headings': headers}
 
 	return render(request, "directory.html", args)

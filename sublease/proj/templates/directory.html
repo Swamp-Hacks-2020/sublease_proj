@@ -1,10 +1,35 @@
-<h1>Listings</h1>
-<table>
+<head>
+  <meta name="theme-color" content="#536dfe">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    {% load static %}
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Compiled and minified JavaScript for Materialize CSS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<nav>
+ <div class="nav-wrapper teal">
+   <a href="../" class="brand-logo center">Swampy Sublease</a>
+   <ul id="nav-mobile" class="right">
+   </ul>
+ </div>
+</nav>
+<h2>Listings</h2>
+
+<table style="width:100%" class="responsive-table">
+  <tr>
+    {% for heading in headings %}
+      <th>
+        {{ heading }}
+      </th>
+    {% endfor %}
+  </tr>
 {% for listing in all %}
 <tr>
-{{listing}}
-<br>
+  {% for info in listing %}
+  <td>{{ info }}</td>
+  {% endfor %}
 </tr>
 {% endfor %}
-
 </table>
