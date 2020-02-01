@@ -1,6 +1,9 @@
 from django import forms
 from django_range_slider.fields import RangeSliderField
+from django.forms.widgets import NumberInput, RadioSelect
 
+class RangeInput(NumberInput):
+    input_type = 'range'
 
 CHOICES = [(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5+')]
 
@@ -23,12 +26,12 @@ class getApartmentInfo(forms.Form):
 
 class filterApartmentListings(forms.Form):
     #checkbox form with options for floorplans
-    bedrooms = forms.MultipleChoiceField(choices = CHOICES, widget = forms.CheckboxSelectMultiple())
-    bathrooms = forms.MultipleChoiceField(choices = CHOICES, widget = forms.CheckboxSelectMultiple())
+    #bedrooms = forms.MultipleChoiceField(choices = CHOICES, widget = forms.CheckboxSelectMultiple())
+    #bathrooms = forms.MultipleChoiceField(choices = CHOICES, widget = forms.CheckboxSelectMultiple())
     #slider form for price ranges (maybe just checkboxes with built in ranges)
-    priceRange = RangeSliderField(minimum = 0, maximum = 2000)
+    maxPrice = forms.IntegerField(widget = forms.TextInput(attrs = {'placeholder' : 'Maximum Price'}), required = False)
     #search based on complex name
-    complexName = forms.CharField(label = 'Complex Name', widget = forms.TextInput(attrs = {'placeholder' : 'Complex Name'}))
+    complexName = forms.CharField(label = 'Complex Name', widget = forms.TextInput(attrs = {'placeholder' : 'Complex Name'}), required = False)
 
     #going to use this inside of the directory views, and then instead of find all from the database, use the form input to narrow down the results
     #can be autorefresh or submit form first and then get results, one significantly harder than the other

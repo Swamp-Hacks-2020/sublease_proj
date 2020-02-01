@@ -34,9 +34,9 @@ def listings(request):
 		zip = form_apt.cleaned_data['zip']
 		semester = form_apt.cleaned_data['semester']
 		complex = form_apt.cleaned_data['complex']
-		bedrooms = form_apt.cleaned_data['bedrooms']
-		bathrooms = form_apt.cleaned_data['bathrooms']
-		cost = form_apt.cleaned_data['cost']
+		bedrooms = int(form_apt.cleaned_data['bedrooms'])
+		bathrooms = int(form_apt.cleaned_data['bathrooms'])
+		cost = int(form_apt.cleaned_data['cost'])
 		utilities = form_apt.cleaned_data['utilities']
 	else:
 		street1 = ""
@@ -110,16 +110,37 @@ def deleted(request):
 def directory(request):
 	form_filter = filterApartmentListings(request.POST or None)
 	if form_filter.is_valid():
-		bedrooms = form_filter.cleaned_data('bedrooms')
-		bathrooms = form_filter.cleaned_data('bathrooms')
-		priceRange = form_filter.cleaned_data('priceRange')
-		complexName = form_filter.cleaned_data('complexName')
-	all_listings = db.listings.find({}) #by default, present all listings
-	all_data = []
-	headers = list(all_listings[0].keys())[1:]
-	print(headers)
-	for listing in all_listings:
-		all_data.append(list(listing.values())[1:])
+		maxPrice = form_filter.cleaned_data['maxPrice']
+		complexName = form_filter.cleaned_data['complexName']
+	else:
+		maxPrice = None
+		complexName = ""
+	if complexName != "" and maxPrice != None:
+		print(maxPrice)
+		all_listings = db.listings.find({'Complex' : complexName, 'Cost': {"$lt":maxPrice}}) #by default, present all listings
+		print("1 form data")
+		all_data = []
+		for listing in all_listings:
+			all_data.append(list(listing.values())[1:])
+	elif complexName != "" and maxPrice == None:
+		all_listings = db.listings.find({'Complex' : complexName}) #by default, present all listings
+		print("2 form data")
+		all_data = []
+		for listing in all_listings:
+			all_data.append(list(listing.values())[1:])
+	elif maxPrice != None and complexName == "":
+		all_listings = db.listings.find({'Cost': {"$lt":maxPrice}}) #by default, present all listings
+		print("3 form data")
+		all_data = []
+		for listing in all_listings:
+			all_data.append(list(listing.values())[1:])
+	else:
+		all_listings = db.listings.find({}) #by default, present all listings
+		print("no form data")
+		all_data = []
+		for listing in all_listings:
+			all_data.append(list(listing.values())[1:])
+	headers = ["name", "email"]
 	args = { 'all' : all_data, 'headings': headers, 'form_filter': form_filter}
 
 	return render(request, "directory.html", args)
