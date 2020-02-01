@@ -116,21 +116,17 @@ def directory(request):
 		maxPrice = None
 		complexName = ""
 	if complexName != "" and maxPrice != None:
-		print(maxPrice)
-		all_listings = db.listings.find({'Complex' : complexName, 'Cost': {"$lt":maxPrice}}) #by default, present all listings
-		print("1 form data")
+		all_listings = db.listings.find({'Complex' : complexName, 'Cost': {"$lte":maxPrice}}) #by default, present all listings
 		all_data = []
 		for listing in all_listings:
 			all_data.append(list(listing.values())[1:])
 	elif complexName != "" and maxPrice == None:
 		all_listings = db.listings.find({'Complex' : complexName}) #by default, present all listings
-		print("2 form data")
 		all_data = []
 		for listing in all_listings:
 			all_data.append(list(listing.values())[1:])
 	elif maxPrice != None and complexName == "":
-		all_listings = db.listings.find({'Cost': {"$lt":maxPrice}}) #by default, present all listings
-		print("3 form data")
+		all_listings = db.listings.find({'Cost': {"$lte":maxPrice}}) #by default, present all listings
 		all_data = []
 		for listing in all_listings:
 			all_data.append(list(listing.values())[1:])
@@ -140,7 +136,7 @@ def directory(request):
 		all_data = []
 		for listing in all_listings:
 			all_data.append(list(listing.values())[1:])
-	headers = ["name", "email"]
+	headers = ["Leaser Name", "Phone", "Email", "Address 1", "Address 2", "City", "Zip", "Semester", "Complex", "Bedrooms", "Bathrooms", "Cost", "Utilities"]
 	args = { 'all' : all_data, 'headings': headers, 'form_filter': form_filter}
 
 	return render(request, "directory.html", args)
