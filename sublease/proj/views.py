@@ -67,11 +67,14 @@ def listings(request):
 		obj = db.listings.insert_one(listing)
 		#print(obj.inserted_id)
 		context = ssl.create_default_context()
-		
+		message = """\
+Subject: Sublease ID
+
+Your id is: """ + str(obj.inserted_id)
 		emailserv = smtplib.SMTP(host = 'smtp.gmail.com', port = 587) #587 html
 		emailserv.starttls(context = context)
 		emailserv.login('swampysublease@gmail.com', 'swamphacks2020')
-		emailserv.sendmail('swampysublease@gmail.com', email, str(obj.inserted_id))
+		emailserv.sendmail('swampysublease@gmail.com', email, message)
 		emailserv.quit()
 		return HttpResponseRedirect(('/listing/success'))
 	else:
