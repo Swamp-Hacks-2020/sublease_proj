@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from pymongo import MongoClient
 from .forms import*
 from pprint import pprint
+import smtplib, ssl
+
 
 client = MongoClient("mongodb+srv://guest:root@listings-gru4r.mongodb.net/test?retryWrites=true&w=majority")
 db = client.business
@@ -61,11 +64,23 @@ def listings(request):
 		'Cost' : cost
 	}
 	if name != "":
-		db.listings.insert_one(listing)
-
-	args = {'form_user' : form_user, 'form_apt': form_apt}
-	return render(request, "listing.html", args)
-
+		obj = db.listings.insert_one(listing)
+		#print(obj.inserted_id)
+		context = ssl.create_default_context()
+		
+		emailserv = smtplib.SMTP(host = 'smtp.gmail.com', port = 587) #587 html
+		emailserv.starttls(context = context)
+		emailserv.login('swampysublease@gmail.com', 'swamphacks2020')
+		emailserv.sendmail('swampysublease@gmail.com', email, str(obj.inserted_id))
+		emailserv.quit()
+		return HttpResponseRedirect(('/listing/success'))
+	else:
+		args = {'form_user' : form_user, 'form_apt': form_apt}
+		return render(request, 'listing.html', args)
+		
+def success(request):
+	return render(request, "success.html")
+	
 def home(request):
     return render(request, "home.html")
 
