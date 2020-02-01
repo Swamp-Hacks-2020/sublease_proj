@@ -8,7 +8,7 @@ class getUserInfo(forms.Form):
 
 class getApartmentInfo(forms.Form):
     street1 = forms.CharField(label = 'Street 1', widget = forms.TextInput(attrs = {'placeholder' : 'Street Address'}))
-    street2 = forms.CharField(label = 'Street 2', widget = forms.TextInput(attrs = {'placeholder' : 'Apt, Bldg, Suite, etc.'}))
+    street2 = forms.CharField(label = 'Street 2', widget = forms.TextInput(attrs = {'placeholder' : 'Apt, Bldg, Suite, etc.'}), required = False)
     city = forms.CharField(label = 'City', widget = forms.TextInput(attrs = {'placeholder' : 'Metropolis'}))
     zip = forms.CharField(label = 'Zip', widget = forms.TextInput(attrs = {'placeholder' : '00000'}), max_length = 5)
     semester = forms.CharField(label = 'Semester', widget = forms.TextInput(attrs = {'placeholder' : 'ex: Fall 2020, Spring 2020, Summer 2020'}), max_length = 15)
