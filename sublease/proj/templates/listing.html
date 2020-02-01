@@ -21,11 +21,13 @@
         <form method="post">
         <div class="row">
             <div class="col m8 push-m2">
+              {% csrf_token %}
                 {{ form_user }}
             </div>
         </div>
         <div class="row">
             <div class="col m8 push-m2">
+              {% csrf_token %}
                 {{ form_apt }}
             </div>
         </div>

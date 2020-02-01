@@ -24,16 +24,16 @@ def listings(request):
 		email = ""
 
 	if form_apt.is_valid():
-		street1 = form_user.cleaned_data['street1']
-		street2 = form_user.cleaned_data['street2']
-		city = form_user.cleaned_data['city']
-		zip = form_user.cleaned_data['zip']
-		semester = form_user.cleaned_data['semester']
-		complex = form_user.cleaned_data['complex']
-		bedrooms = form_user.cleaned_data['bedrooms']
-		bathrooms = form_user.cleaned_data['bathrooms']
-		cost = form_user.cleaned_data['cost']
-		utilities = form_user.cleaned_data['utilities']
+		street1 = form_apt.cleaned_data['street1']
+		street2 = form_apt.cleaned_data['street2']
+		city = form_apt.cleaned_data['city']
+		zip = form_apt.cleaned_data['zip']
+		semester = form_apt.cleaned_data['semester']
+		complex = form_apt.cleaned_data['complex']
+		bedrooms = form_apt.cleaned_data['bedrooms']
+		bathrooms = form_apt.cleaned_data['bathrooms']
+		cost = form_apt.cleaned_data['cost']
+		utilities = form_apt.cleaned_data['utilities']
 	else:
 		street1 = ""
 		street2 = ""
@@ -47,8 +47,20 @@ def listings(request):
 		utilities = ""
 
 	listing = {
-
+		'Leaser Name' : name,
+		'Phone' : phone,
+		'Email' : email,
+		'Address 1' : street1,
+		'Address 2' : street2,
+		'City' : city,
+		'Zip' : zip,
+		'Semester' : semester,
+		'Complex' : complex,
+		'Bedrooms' : bedrooms,
+		'Bathrooms' : bathrooms,
+		'Cost' : cost
 	}
+	db.listings.insert_one(listing)
 
 	args = {'form_user' : form_user, 'form_apt': form_apt}
 	return render(request, "listing.html", args)
