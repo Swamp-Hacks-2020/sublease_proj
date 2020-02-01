@@ -10,9 +10,10 @@ class getUserInfo(forms.Form):
 
 class getApartmentInfo(forms.Form):
     address = form.CharField(label = 'Address', widget = forms.TextInput(attrs = {'placeholder' = 'Apartment Address'}))
-    #Caleb updates
+    #address updates - Caleb
     complex = form.CharField(label = 'Complex', widget = forms.TextInput(attrs = {'placeholder' = 'Apartment Complex (Optional)'}, required = false))
     bedrooms = form.CharField(label = 'Bedrooms', widget = forms.TextInput(attrs = {'placeholder' = 'Number of Bedrooms'}, max_length = 1))
     bathrooms = form.CharField(label = 'Bathrooms', widget = forms.TextInput(attrs = {'placeholder' = 'Number of Bathrooms', max_length = 1}))
     cost = form.CharField(label = 'Cost', widget = forms.TextInput(attrs = {'placeholder' = 'Cost per Month'}))
-    utilities = form.BooleanField(label = 'Utilities', widget = )
+    utilities = form.ChoiceField(choices = ("Included", "Not included")) #need to check syntax
+    #date available - Caleb
