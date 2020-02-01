@@ -1,1 +1,35 @@
-<h1>You want to make a listing</h1>
+<head>
+  <meta name="theme-color" content="#536dfe">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    {% load static %}
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Compiled and minified JavaScript for Materialize CSS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<nav>
+ <div class="nav-wrapper blue accent-1">
+   <a href="" class="brand-logo">UF Subleasing</a>
+   <ul id="nav-mobile" class="right">
+   </ul>
+ </div>
+</nav>
+<br>
+<body>
+      <div class="container">
+        <form method="post">
+        <div class="row">
+            <div class="col m8 push-m2">
+                {{ form_user }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m8 push-m2">
+                {{ form_apt }}
+            </div>
+        </div>
+        <div class="center-align"> <button type="submit" class="btn indigo accent-2">Make Listing</button> </div>
+        </form>
+      </div>
+    </body>

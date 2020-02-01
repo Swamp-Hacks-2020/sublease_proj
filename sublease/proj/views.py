@@ -13,18 +13,14 @@ def listings(request):
 
 	form_user = getUserInfo(request.POST or None)
 	form_apt = getApartmentInfo(request.POST or None)
-	
+
 	if form_user.is_valid():
 		name = form_user.cleaned_data['name']
-		phone1 = form_user.cleaned_data['phone1']
-		phone2 = form_user.cleaned_data['phone2']
-		phone3 = form_user.cleaned_data['phone3']
+		phone = form_user.cleaned_data['phone']
 		email = form_user.cleaned_data['email']
 	else:
 		name = ""
-		phone1 = ""
-		phone2 = ""
-		phone3 = ""
+		phone = ""
 		email = ""
 
 	if form_apt.is_valid():
@@ -50,14 +46,19 @@ def listings(request):
 		cost = ""
 		utilities = ""
 
-	return render(request, "listing.html")
+	listing = {
+
+	}
+
+	args = {'form_user' : form_user, 'form_apt': form_apt}
+	return render(request, "listing.html", args)
 
 def home(request):
     return render(request, "home.html")
 
-def view(request):
+def directory(request):
 	all_listings = db.listings.find({}) #by default, present all listings
-	
+
 	args = { 'all' : all_listings}
-	
-	return render(request, "view.html", args)
+
+	return render(request, "directory.html", args)
