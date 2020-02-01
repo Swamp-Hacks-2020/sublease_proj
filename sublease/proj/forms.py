@@ -7,6 +7,7 @@ class getUserInfo(forms.Form):
     phone1 = form.CharField(label = 'Area code', widget = forms.TextInput(attrs = {'placeholder' = '123'}, max_length = 3, min_length = 3))
     phone2 = form.CharField(label = 'Number', widget = forms.TextInput(attrs = {'placeholder' = '456'}, max_length = 3, min_length = 3))
     phone3 = form.CharField(label = 'Number', widget = forms.TextInput(attrs = {'placeholder' = '7890'}, max_length = 4, min_length = 4))
+    email = form.EmailField(max_length = 200)
 
 class getApartmentInfo(forms.Form):
     address = form.CharField(label = 'Address', widget = forms.TextInput(attrs = {'placeholder' = 'Apartment Address'}))
