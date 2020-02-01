@@ -5,6 +5,7 @@ from pymongo import MongoClient
 from .forms import*
 from pprint import pprint
 import smtplib, ssl
+from bson.objectid import ObjectId
 
 
 client = MongoClient("mongodb+srv://guest:root@listings-gru4r.mongodb.net/test?retryWrites=true&w=majority")
@@ -80,22 +81,43 @@ Your id is: """ + str(obj.inserted_id)
 	else:
 		args = {'form_user' : form_user, 'form_apt': form_apt}
 		return render(request, 'listing.html', args)
-		
+
 def success(request):
 	return render(request, "success.html")
-	
+
 def home(request):
     return render(request, "home.html")
 
 def update(request):
-	token = '5e35b104a62653d419237dc0'
+	form_user = getUserInfo(request.POST or None)
+	form_apt = getApartmentInfo(request.POST or None)
+
+	form_token = getToken(request.POST or None)
+	if form_token.is_valid():
+		token = form_token.cleaned_data['token']
+	else:
+		token = ""
+	if token != "":
+		result = db.listings.delete_many({"_id": ObjectId(token)})
+		return HttpResponseRedirect(('/update/deleted'))
+	args = {'form_token' : form_token}
+	return render(request, "update.html", args)
+
+def deleted(request):
+	return render(request, "deleted.html")
 
 def directory(request):
+	form_filter = filterApartmentListings(request.POST or None)
+	if form_filter.is_valid():
+		bedrooms = form_filter.cleaned_data('bedrooms')
+		bathrooms = form_filter.cleaned_data('bathrooms')
+		priceRange = form_filter.cleaned_data('priceRange')
+		complexName = form_filter.cleaned_data('complexName')
 	all_listings = db.listings.find({}) #by default, present all listings
 	all_data = []
 	headers = list(all_listings[0].keys())[1:]
 	for listing in all_listings:
 		all_data.append(list(listing.values())[1:])
-	args = { 'all' : all_data, 'headings': headers}
+	args = { 'all' : all_data, 'headings': headers, 'form_filter': form_filter}
 
 	return render(request, "directory.html", args)
