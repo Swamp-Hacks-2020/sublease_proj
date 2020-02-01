@@ -19,17 +19,71 @@
 <body>
       <div class="container">
         <form method="post">
+          <h4>Leaser Information</h4>
         <div class="row">
-            <div class="col m8 push-m2">
+            <div class="col m4 s12">
               {% csrf_token %}
-                {{ form_user }}
+                {{ form_user.name }}
+            </div>
+            <div class="col m4 s12">
+              {% csrf_token %}
+                {{ form_user.phone }}
+            </div>
+            <div class="col m4 s12">
+              {% csrf_token %}
+                {{ form_user.email }}
+            </div>
+        </div>
+        <h4>Apartment Information</h4>
+        <div class="row">
+            <div class="col m9 s12">
+              {% csrf_token %}
+                {{ form_apt.street1 }}
+            </div>
+            <div class="col m3 s12">
+              {% csrf_token %}
+                {{ form_apt.zip }}
             </div>
         </div>
         <div class="row">
-            <div class="col m8 push-m2">
+            <div class="col m9 s12">
               {% csrf_token %}
-                {{ form_apt }}
+                {{ form_apt.street2 }}
             </div>
+            <div class="col m3 s12">
+              {% csrf_token %}
+                {{ form_apt.city }}
+            </div>
+        </div>
+        <div class="row">
+          <div class="col m12 s12">
+            {% csrf_token %}
+              {{ form_apt.semester }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col m6 s12">
+            {% csrf_token %}
+              {{ form_apt.complex }}
+          </div>
+          <div class="col m3 s12">
+            {% csrf_token %}
+              {{ form_apt.bedrooms }}
+          </div>
+          <div class="col m3 s12">
+            {% csrf_token %}
+              {{ form_apt.bathrooms }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col m6 s12">
+            {% csrf_token %}
+              {{ form_apt.cost }}
+          </div>
+          <div class="input-field col m6 s12">
+            {% csrf_token %}
+              {{ form_apt.utilities }}
+          </div>
         </div>
         <div class="center-align"> <button type="submit" class="btn teal">Make Listing</button> </div>
         </form>
