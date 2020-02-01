@@ -8,6 +8,7 @@
     <!-- Compiled and minified JavaScript for Materialize CSS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
+
 <nav>
  <div class="nav-wrapper teal">
    <a href="../" class="brand-logo center">Swampy Sublease</a>
@@ -15,30 +16,13 @@
    </ul>
  </div>
 </nav>
-<h2>Listings</h2>
 
-
-{% for thing in form_filter.bedrooms %}
-<p>
-  <label>
-    <input type="checkbox" class="filled-in" checked="checked" />
-    <span>{{thing}}</span>
-  </label>
-</p>{% endfor %}
-
-<table style="width:100%" class="responsive-table">
-  <tr>
-    {% for heading in headings %}
-      <th>
-        {{ heading }}
-      </th>
-    {% endfor %}
-  </tr>
-{% for listing in all %}
-<tr>
-  {% for info in listing %}
-  <td>{{ info }}</td>
-  {% endfor %}
-</tr>
-{% endfor %}
-</table>
+<form method="post">
+  <div class="row">
+    <div class="col m6 s12">
+      {% csrf_token %}
+        {{ form_token }}
+    </div>
+  </div>
+  <div class="center-align"> <button type="submit" class="btn teal">Delete Listing</button> </div>
+</form>

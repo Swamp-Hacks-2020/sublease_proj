@@ -8,37 +8,16 @@
     <!-- Compiled and minified JavaScript for Materialize CSS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
+
 <nav>
  <div class="nav-wrapper teal">
-   <a href="../" class="brand-logo center">Swampy Sublease</a>
+   <a href="../../" class="brand-logo center">Swampy Sublease</a>
    <ul id="nav-mobile" class="right">
    </ul>
  </div>
 </nav>
-<h2>Listings</h2>
+<br>
 
+<h1> Form successfully submitted! </h1>
 
-{% for thing in form_filter.bedrooms %}
-<p>
-  <label>
-    <input type="checkbox" class="filled-in" checked="checked" />
-    <span>{{thing}}</span>
-  </label>
-</p>{% endfor %}
-
-<table style="width:100%" class="responsive-table">
-  <tr>
-    {% for heading in headings %}
-      <th>
-        {{ heading }}
-      </th>
-    {% endfor %}
-  </tr>
-{% for listing in all %}
-<tr>
-  {% for info in listing %}
-  <td>{{ info }}</td>
-  {% endfor %}
-</tr>
-{% endfor %}
-</table>
+<p> An email with a code uniquely identifying your listing has been sent to your email. This is needed to update or delete your listing. Do NOT lose this. </p>

@@ -1,10 +1,8 @@
 from django import forms
+from django_range_slider.fields import RangeSliderField
 
 
-UTILITIES_CHOICES = [
- ('Included', 'Included'),
- ('Not Included', 'Not Included'),
-]
+CHOICES = [(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5+')]
 
 class getUserInfo(forms.Form):
     name = forms.CharField(label = 'Name', widget = forms.TextInput(attrs = {'placeholder' : 'Name'}), max_length = 50)
@@ -24,9 +22,15 @@ class getApartmentInfo(forms.Form):
     utilities = forms.CharField(label = 'Utilities', widget = forms.TextInput(attrs = {'placeholder' : 'Utilities Included (i.e. Yes, No)'}))
 
 class filterApartmentListings(forms.Form):
-    a=5
     #checkbox form with options for floorplans
+    bedrooms = forms.MultipleChoiceField(choices = CHOICES, widget = forms.CheckboxSelectMultiple())
+    bathrooms = forms.MultipleChoiceField(choices = CHOICES, widget = forms.CheckboxSelectMultiple())
     #slider form for price ranges (maybe just checkboxes with built in ranges)
+    priceRange = RangeSliderField(minimum = 0, maximum = 2000)
     #search based on complex name
+    complexName = forms.CharField(label = 'Complex Name', widget = forms.TextInput(attrs = {'placeholder' : 'Complex Name'}))
+
     #going to use this inside of the directory views, and then instead of find all from the database, use the form input to narrow down the results
     #can be autorefresh or submit form first and then get results, one significantly harder than the other
+class getToken(forms.Form):
+    token = forms.CharField(label = 'Token', widget = forms.TextInput(attrs = {'placeholder' : 'Token Val'}), max_length = 24)

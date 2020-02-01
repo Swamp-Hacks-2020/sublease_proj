@@ -23,4 +23,6 @@ urlpatterns = [
     path("directory/", views.directory, name="directory"),
     path('admin/', admin.site.urls),
 	path('listing/success/', views.success, name = "success"),
+	path('update/', views.update, name = 'update'),
+	path('update/deleted/', views.deleted, name = "deleted"),
 ]
