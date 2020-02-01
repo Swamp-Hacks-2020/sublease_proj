@@ -60,7 +60,8 @@ def listings(request):
 		'Bathrooms' : bathrooms,
 		'Cost' : cost
 	}
-	db.listings.insert_one(listing)
+	if name != "":
+		db.listings.insert_one(listing)
 
 	args = {'form_user' : form_user, 'form_apt': form_apt}
 	return render(request, "listing.html", args)
