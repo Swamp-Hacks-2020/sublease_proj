@@ -87,6 +87,9 @@ def success(request):
 def home(request):
     return render(request, "home.html")
 
+def update(request):
+	token = '5e35b104a62653d419237dc0'
+
 def directory(request):
 	all_listings = db.listings.find({}) #by default, present all listings
 	all_data = []
