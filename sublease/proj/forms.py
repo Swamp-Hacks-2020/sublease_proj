@@ -22,3 +22,11 @@ class getApartmentInfo(forms.Form):
     bathrooms = forms.CharField(label = 'Bathrooms', widget = forms.TextInput(attrs = {'placeholder' : 'Number of Bathrooms'}), max_length = 1)
     cost = forms.CharField(label = 'Cost', widget = forms.TextInput(attrs = {'placeholder' : 'Cost per Month'}))
     utilities = forms.CharField(label = 'Utilities', widget = forms.TextInput(attrs = {'placeholder' : 'Utilities Included (i.e. Yes, No)'}))
+
+class filterApartmentListings(forms.Form):
+    a=5
+    #checkbox form with options for floorplans
+    #slider form for price ranges (maybe just checkboxes with built in ranges)
+    #search based on complex name
+    #going to use this inside of the directory views, and then instead of find all from the database, use the form input to narrow down the results
+    #can be autorefresh or submit form first and then get results, one significantly harder than the other
