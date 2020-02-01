@@ -1,1 +1,9 @@
-<h1>You want to view the listings</h1>
+<h1>Listings</h1>
+<table>
+{% for listing in all %}
+<tr>
+{{listing}}
+</tr>
+{% endfor %}
+
+</table>

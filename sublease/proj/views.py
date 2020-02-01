@@ -25,4 +25,8 @@ def home(request):
     return render(request, "home.html")
 
 def view(request):
-    return render(request, "view.html")
+	all_listings = db.listings.find({}) #by default, present all listings
+	
+	args = { 'all' : all_listings}
+	
+	return render(request, "view.html", args)
