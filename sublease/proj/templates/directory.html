@@ -17,16 +17,25 @@
 </nav>
 <h2>Listings</h2>
 
+<form method="post">
+  <div class="row">
+<div class="col m3">
+  <p></p>
+  {% csrf_token %}
+  {{ form_filter.complexName}}
+</div>
+<div class="col m3">
+  <p></p>
+  {% csrf_token %}
+  {{ form_filter.maxPrice}}
+</div>
+  </div>
+<div class="center-align"> <button type="submit" class="btn teal">Filter Listings</button> </div>
+</form>
 
-{% for thing in form_filter.bedrooms %}
-<p>
-  <label>
-    <input type="checkbox" class="filled-in" checked="checked" />
-    <span>{{thing}}</span>
-  </label>
-</p>{% endfor %}
 
-<table style="width:100%" class="responsive-table">
+
+<table style="width:100%" class="striped responsive-table">
   <tr>
     {% for heading in headings %}
       <th>
