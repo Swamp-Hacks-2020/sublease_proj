@@ -62,7 +62,8 @@ def listings(request):
 		'Complex' : complex,
 		'Bedrooms' : bedrooms,
 		'Bathrooms' : bathrooms,
-		'Cost' : cost
+		'Cost' : cost,
+		'Utilities' : utilities
 	}
 	if name != "":
 		obj = db.listings.insert_one(listing)
@@ -116,6 +117,7 @@ def directory(request):
 	all_listings = db.listings.find({}) #by default, present all listings
 	all_data = []
 	headers = list(all_listings[0].keys())[1:]
+	print(headers)
 	for listing in all_listings:
 		all_data.append(list(listing.values())[1:])
 	args = { 'all' : all_data, 'headings': headers, 'form_filter': form_filter}
