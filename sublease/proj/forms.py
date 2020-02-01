@@ -10,11 +10,13 @@ class getUserInfo(forms.Form):
     email = form.EmailField(max_length = 200)
 
 class getApartmentInfo(forms.Form):
-    address = form.CharField(label = 'Address', widget = forms.TextInput(attrs = {'placeholder' = 'Apartment Address'}))
-    #address updates - Caleb
+    street1 = form.CharField(label = 'Street 1', widget = forms.TextInput(attrs = {'placeholder' = ''}))
+    street2 = form.CharField(label = 'Street 2', widget = forms.TextInput(attrs = {'placeholder' = ''}))
+    city = form.CharField(label = 'City', widget = forms.TextInput(attrs = {'placeholder' = ''}))
+    zip = form.CharField(label = 'Street 2', widget = forms.TextInput(attrs = {'placeholder' = ''}, max_length = 5))
+    semester = form.CharField(label = 'Semester', widget = forms.TextInput(attrs = {'placeholder' = 'ex: Fall 2020, Spring 2020, Summer 2020'}, max_length = 15))
     complex = form.CharField(label = 'Complex', widget = forms.TextInput(attrs = {'placeholder' = 'Apartment Complex (Optional)'}, required = false))
     bedrooms = form.CharField(label = 'Bedrooms', widget = forms.TextInput(attrs = {'placeholder' = 'Number of Bedrooms'}, max_length = 1))
     bathrooms = form.CharField(label = 'Bathrooms', widget = forms.TextInput(attrs = {'placeholder' = 'Number of Bathrooms', max_length = 1}))
     cost = form.CharField(label = 'Cost', widget = forms.TextInput(attrs = {'placeholder' = 'Cost per Month'}))
     utilities = form.ChoiceField(choices = ("Included", "Not included")) #need to check syntax
-    #date available - Caleb
