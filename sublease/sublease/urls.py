@@ -22,4 +22,5 @@ urlpatterns = [
     path("listing/", views.listings, name="listings"),
     path("directory/", views.directory, name="directory"),
     path('admin/', admin.site.urls),
+	path('listing/success/', views.success, name = "success"),
 ]
