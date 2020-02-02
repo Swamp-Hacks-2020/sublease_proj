@@ -116,6 +116,7 @@ def directory(request):
 	else:
 		maxPrice = None
 		complexName = ""
+		semester = ""
 	if complexName != "" and maxPrice != None:
 		all_listings = db.listings.find({'Complex' : complexName, 'Cost': {"$lte":maxPrice}}) #by default, present all listings
 		all_data = []
