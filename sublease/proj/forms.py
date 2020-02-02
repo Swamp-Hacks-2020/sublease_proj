@@ -25,15 +25,10 @@ class getApartmentInfo(forms.Form):
     utilities = forms.CharField(label = 'Utilities', widget = forms.TextInput(attrs = {'placeholder' : 'Utilities Included (i.e. Yes, No)'}))
 
 class filterApartmentListings(forms.Form):
-    #checkbox form with options for floorplans
-    #bedrooms = forms.MultipleChoiceField(choices = CHOICES, widget = forms.CheckboxSelectMultiple())
-    #bathrooms = forms.MultipleChoiceField(choices = CHOICES, widget = forms.CheckboxSelectMultiple())
-    #slider form for price ranges (maybe just checkboxes with built in ranges)
     maxPrice = forms.IntegerField(widget = forms.TextInput(attrs = {'placeholder' : 'Maximum Price'}), required = False)
-    #search based on complex name
     complexName = forms.CharField(label = 'Complex Name', widget = forms.TextInput(attrs = {'placeholder' : 'Complex Name'}), required = False)
+    semester = forms.CharField(label = 'Semester', widget = forms.TextInput(attrs = {'placeholder' : 'Desired Semester'}), required = False)
+    
 
-    #going to use this inside of the directory views, and then instead of find all from the database, use the form input to narrow down the results
-    #can be autorefresh or submit form first and then get results, one significantly harder than the other
 class getToken(forms.Form):
     token = forms.CharField(label = 'Token', widget = forms.TextInput(attrs = {'placeholder' : 'Token Val'}), max_length = 24)

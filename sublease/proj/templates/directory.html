@@ -15,7 +15,7 @@
    </ul>
  </div>
 </nav>
-<h2>Listings</h2>
+<h4>Listings</h4>
 
 <form method="post">
   <div class="row">
@@ -28,6 +28,11 @@
   <p></p>
   {% csrf_token %}
   {{ form_filter.maxPrice}}
+</div>
+<div class="col m3">
+  <p></p>
+  {% csrf_token %}
+  {{ form_filter.semester}}
 </div>
   </div>
 <div class="center-align"> <button type="submit" class="btn teal">Filter Listings</button> </div>

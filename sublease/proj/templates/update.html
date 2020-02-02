@@ -16,13 +16,16 @@
    </ul>
  </div>
 </nav>
-
+<br>
 <form method="post">
   <div class="row">
     <div class="col m6 s12">
       {% csrf_token %}
-        {{ form_token }}
+        {{ form_token.token }}
+    </div>
+    <div class="col m6 s12">
+      <p></p>
+      <button type="submit" class="btn teal">Delete Listing</button>
     </div>
   </div>
-  <div class="center-align"> <button type="submit" class="btn teal">Delete Listing</button> </div>
 </form>

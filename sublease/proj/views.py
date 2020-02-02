@@ -112,6 +112,7 @@ def directory(request):
 	if form_filter.is_valid():
 		maxPrice = form_filter.cleaned_data['maxPrice']
 		complexName = form_filter.cleaned_data['complexName']
+		semester = form_filter.cleaned_data['semester']
 	else:
 		maxPrice = None
 		complexName = ""
@@ -132,7 +133,6 @@ def directory(request):
 			all_data.append(list(listing.values())[1:])
 	else:
 		all_listings = db.listings.find({}) #by default, present all listings
-		print("no form data")
 		all_data = []
 		for listing in all_listings:
 			all_data.append(list(listing.values())[1:])
