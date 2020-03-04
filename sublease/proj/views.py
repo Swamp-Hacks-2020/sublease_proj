@@ -117,18 +117,39 @@ def directory(request):
 		maxPrice = None
 		complexName = ""
 		semester = ""
-	if complexName != "" and maxPrice != None:
-		all_listings = db.listings.find({'Complex' : complexName, 'Cost': {"$lte":maxPrice}}) #by default, present all listings
+
+	if complexName != "" and maxPrice != None and semester != "":
+		all_listings = db.listings.find({'Complex' : {"$regex": complexName, "$options": "i"}, 'Cost': {"$lte":maxPrice}, 'Semester' : {"$regex": semester, "$options": "i"}})
 		all_data = []
 		for listing in all_listings:
 			all_data.append(list(listing.values())[1:])
-	elif complexName != "" and maxPrice == None:
-		all_listings = db.listings.find({'Complex' : complexName}) #by default, present all listings
+	elif complexName != "" and maxPrice != None:
+		all_listings = db.listings.find({'Complex' : {"$regex": complexName, "$options": "i"}, 'Cost': {"$lte":maxPrice}}) #name and price are specified
 		all_data = []
 		for listing in all_listings:
 			all_data.append(list(listing.values())[1:])
-	elif maxPrice != None and complexName == "":
-		all_listings = db.listings.find({'Cost': {"$lte":maxPrice}}) #by default, present all listings
+	elif complexName != "" and semester != "":
+		all_listings = db.listings.find({'Complex' : {"$regex": complexName, "$options": "i"}, 'Semester' : {"$regex": semester, "$options": "i"}})
+		all_data = []
+		for listing in all_listings:
+			all_data.append(list(listing.values())[1:])
+	elif maxPrice != None and semester != "":
+		all_listings = db.listings.find({'Cost': {"$lte":maxPrice}, 'Semester' : {"$regex": semester, "$options": "i"}})
+		all_data = []
+		for listing in all_listings:
+			all_data.append(list(listing.values())[1:])
+	elif complexName != "" and maxPrice == None and semester == "":
+		all_listings = db.listings.find({'Complex' : {"$regex": complexName, "$options": "i"}}) #only by name
+		all_data = []
+		for listing in all_listings:
+			all_data.append(list(listing.values())[1:])
+	elif maxPrice != None and complexName == "" and semester == "":
+		all_listings = db.listings.find({'Cost': {"$lte":maxPrice}}) #only by price
+		all_data = []
+		for listing in all_listings:
+			all_data.append(list(listing.values())[1:])
+	elif semester != "" and maxPrice == None and complexName == "":
+		all_listings = db.listings.find({'Semester' : {"$regex": semester, "$options": "i"}})
 		all_data = []
 		for listing in all_listings:
 			all_data.append(list(listing.values())[1:])
@@ -137,7 +158,7 @@ def directory(request):
 		all_data = []
 		for listing in all_listings:
 			all_data.append(list(listing.values())[1:])
-	headers = ["Leaser Name", "Phone", "Email", "Address 1", "Address 2", "City", "Zip", "Semester", "Complex", "Bedrooms", "Bathrooms", "Cost", "Utilities"]
+	headers = ["Leaser Name", "Phone", "Email", "Address 1", "Address 2", "City", "Zip", "Semester", "Complex", "Bed", "Bath", "Cost", "Utilities"]
 	args = { 'all' : all_data, 'headings': headers, 'form_filter': form_filter}
 
 	return render(request, "directory.html", args)

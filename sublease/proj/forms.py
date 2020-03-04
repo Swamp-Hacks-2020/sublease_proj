@@ -22,13 +22,13 @@ class getApartmentInfo(forms.Form):
     bedrooms = forms.CharField(label = 'Bedrooms', widget = forms.TextInput(attrs = {'placeholder' : 'Number of Bedrooms'}), max_length = 1)
     bathrooms = forms.CharField(label = 'Bathrooms', widget = forms.TextInput(attrs = {'placeholder' : 'Number of Bathrooms'}), max_length = 1)
     cost = forms.CharField(label = 'Cost', widget = forms.TextInput(attrs = {'placeholder' : 'Cost per Month'}))
-    utilities = forms.CharField(label = 'Utilities', widget = forms.TextInput(attrs = {'placeholder' : 'Utilities Included (i.e. Yes, No)'}))
+    utilities = forms.CharField(label = 'Utilities', widget = forms.TextInput(attrs = {'placeholder' : 'Utilities Included (i.e. Yes, No)'}), max_length = 3)
 
 class filterApartmentListings(forms.Form):
     maxPrice = forms.IntegerField(widget = forms.TextInput(attrs = {'placeholder' : 'Maximum Price'}), required = False)
     complexName = forms.CharField(label = 'Complex Name', widget = forms.TextInput(attrs = {'placeholder' : 'Complex Name'}), required = False)
     semester = forms.CharField(label = 'Semester', widget = forms.TextInput(attrs = {'placeholder' : 'Desired Semester'}), required = False)
-    
+
 
 class getToken(forms.Form):
     token = forms.CharField(label = 'Token', widget = forms.TextInput(attrs = {'placeholder' : 'Token Val'}), max_length = 24)

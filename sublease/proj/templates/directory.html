@@ -1,57 +1,69 @@
-<head>
-  <meta name="theme-color" content="#536dfe">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    {% load static %}
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <!-- Compiled and minified JavaScript for Materialize CSS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</head>
-<nav>
- <div class="nav-wrapper teal">
-   <a href="../" class="brand-logo center">Swampy Sublease</a>
-   <ul id="nav-mobile" class="right">
-   </ul>
- </div>
-</nav>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
 
-<h4>&nbspListings</h4>
+    <style media="screen">
+      .table-responsive .table {
+      max-width: none;
+      -webkit-overflow-scrolling: touch !important;
+  }
+    </style>
+    <meta name="theme-color" content="#536dfe">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+      {% load static %}
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <!-- Compiled and minified JavaScript for Materialize CSS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
+    <title></title>
+  </head>
+  <body>
+    <nav>
+     <div class="nav-wrapper teal">
+       <a href="../" class="brand-logo center">Swampy Sublease</a>
+       <ul id="nav-mobile" class="right">
+       </ul>
+     </div>
+    </nav>
+    <h4>&nbspListings</h4>
 
-<form method="post">
-  <div class="row">
-<div class="col m3">
-  <p></p>
-  {% csrf_token %}
-  {{ form_filter.complexName}}
-</div>
-<div class="col m3">
-  <p></p>
-  {% csrf_token %}
-  {{ form_filter.maxPrice}}
-</div>
-<div class="col m3">
-  <p></p>
-  {% csrf_token %}
-  {{ form_filter.semester}}
-</div>
-  </div>
-<div class="center-align"> <button type="submit" class="btn teal">Filter Listings</button> </div>
-</form>
-
-<table style="width:100%" class="striped responsive-table">
-  <tr>
-    {% for heading in headings %}
-      <th>
-        {{ heading }}
-      </th>
+    <form method="post">
+      <div class="row">
+    <div class="col m3 s6">
+      <p></p>
+      {% csrf_token %}
+      {{ form_filter.complexName}}
+    </div>
+    <div class="col m3 s6">
+      <p></p>
+      {% csrf_token %}
+      {{ form_filter.maxPrice}}
+    </div>
+    <div class="col m3 s6">
+      <p></p>
+      {% csrf_token %}
+      {{ form_filter.semester}}
+    </div>
+      </div>
+    <div class="center-align"> <button type="submit" class="btn teal">Filter Listings</button> </div>
+    </form>
+<br>
+    <table style="width:100%" class="striped responsive-table">
+      <tr>
+        {% for heading in headings %}
+          <th>
+            {{ heading }}
+          </th>
+        {% endfor %}
+      </tr>
+    {% for listing in all %}
+    <tr>
+      {% for info in listing %}
+      <td>{{ info }}</td>
+      {% endfor %}
+    </tr>
     {% endfor %}
-  </tr>
-{% for listing in all %}
-<tr>
-  {% for info in listing %}
-  <td>{{ info }}</td>
-  {% endfor %}
-</tr>
-{% endfor %}
-</table>
+    </table>
+  </body>
+</html>
